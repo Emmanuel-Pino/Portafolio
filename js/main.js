@@ -97,6 +97,35 @@ $(document).ready(function() {
     // Ejecutar al cargar por si las secciones están visibles
     $(window).trigger('scroll');
 
+    // ===== NUEVO: Forzar carga de skills al cargar la página =====
+    $(window).on('load', function() {
+        // Esperar un momento y forzar detección de elementos visibles
+        setTimeout(function() {
+            // Forzar trigger de scroll
+            $(window).trigger('scroll');
+            
+            // Verificar si skills están en viewport al cargar
+            var skillsSection = $('#skills');
+            if (skillsSection.length) {
+                var skillsTop = skillsSection.offset().top;
+                var windowBottom = $(window).scrollTop() + $(window).height();
+                
+                // Si skills está visible al cargar, animarlas inmediatamente
+                if (windowBottom > skillsTop) {
+                    animateSkills();
+                }
+            }
+            
+            // Failsafe: Si después de 1 segundo las skills siguen invisibles, forzar animación
+            setTimeout(function() {
+                if ($('.skill-card').first().css('opacity') == '0') {
+                    console.log('Forzando animación de skills...');
+                    animateSkills();
+                }
+            }, 1000);
+        }, 300);
+    });
+
     // ===== Animación Fade-in para elementos generales =====
     function checkFadeIn() {
         $('.fade-in').each(function() {

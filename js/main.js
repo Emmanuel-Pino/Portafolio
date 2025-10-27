@@ -97,26 +97,21 @@ $(document).ready(function() {
     // Ejecutar al cargar por si las secciones están visibles
     $(window).trigger('scroll');
 
-    // ===== NUEVO: Forzar carga de skills al cargar la página =====
+    // ===== Forzar carga de skills al cargar la página =====
     $(window).on('load', function() {
-        // Esperar un momento y forzar detección de elementos visibles
         setTimeout(function() {
-            // Forzar trigger de scroll
             $(window).trigger('scroll');
             
-            // Verificar si skills están en viewport al cargar
             var skillsSection = $('#skills');
             if (skillsSection.length) {
                 var skillsTop = skillsSection.offset().top;
                 var windowBottom = $(window).scrollTop() + $(window).height();
                 
-                // Si skills está visible al cargar, animarlas inmediatamente
                 if (windowBottom > skillsTop) {
                     animateSkills();
                 }
             }
             
-            // Failsafe: Si después de 1 segundo las skills siguen invisibles, forzar animación
             setTimeout(function() {
                 if ($('.skill-card').first().css('opacity') == '0') {
                     console.log('Forzando animación de skills...');
@@ -139,19 +134,15 @@ $(document).ready(function() {
     }
 
     $(window).scroll(checkFadeIn);
-    checkFadeIn(); // Ejecutar al cargar
+    checkFadeIn();
 
     // ===== Filtro de Proyectos =====
     $('.filter-btn').on('click', function() {
-        // Remover clase active de todos los botones
         $('.filter-btn').removeClass('active');
-        // Agregar clase active al botón clickeado
         $(this).addClass('active');
         
-        // Obtener el filtro seleccionado
         var filterValue = $(this).attr('data-filter');
         
-        // Mostrar/ocultar proyectos según el filtro
         if (filterValue === 'all') {
             $('.project-item').fadeIn(500).removeClass('hidden');
         } else {
@@ -165,15 +156,18 @@ $(document).ready(function() {
         }
     });
 
-    // ===== FORMULARIO DE CONTACTO - ELIMINADO =====
-    // Ya no es necesario porque FormSubmit maneja el envío automáticamente
-    // El formulario se envía directamente al correo configurado
+    // ===== FORMULARIO DE CONTACTO - PERMITIR ENVÍO =====
+    // NO prevenir el comportamiento por defecto
+    // Dejar que FormSubmit maneje el envío automáticamente
+    $('#contactForm').on('submit', function(e) {
+        console.log('Formulario enviándose a FormSubmit...');
+        // NO usar e.preventDefault() aquí
+        // El formulario se enviará normalmente
+    });
 
     // ===== Botón "Back to Top" =====
-    // Crear botón
     $('body').append('<a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>');
     
-    // Estilos del botón
     $('.back-to-top').css({
         'position': 'fixed',
         'bottom': '30px',
@@ -192,7 +186,6 @@ $(document).ready(function() {
         'transition': 'all 0.3s ease'
     });
 
-    // Mostrar/ocultar botón según scroll
     $(window).scroll(function() {
         if ($(this).scrollTop() > 300) {
             $('.back-to-top').fadeIn().css('display', 'flex');
@@ -201,13 +194,11 @@ $(document).ready(function() {
         }
     });
 
-    // Scroll suave al hacer click
     $('.back-to-top').on('click', function(e) {
         e.preventDefault();
         $('html, body').animate({scrollTop: 0}, 800);
     });
 
-    // Efecto hover del botón
     $('.back-to-top').hover(
         function() {
             $(this).css({
@@ -232,7 +223,6 @@ $(document).ready(function() {
 
     // ===== Preloader (opcional) =====
     $(window).on('load', function() {
-        // Ocultar preloader si existe
         $('.preloader').fadeOut('slow');
     });
 

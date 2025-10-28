@@ -4,9 +4,9 @@
     --secondary-color: #6c757d;
     --dark-color: #263629;
     --light-color: #f8f9fa;
-    --gradient-1: linear-gradient(135deg, #82d43f 0%, #083d08 100%);
+    --gradient-1: linear-gradient(135deg, #5366a2 0%, #02010e 100%);
     --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    --gradient-3: linear-gradient(135deg, #c9fe4f 0%, #00fe22 100%);
+    --gradient-3: linear-gradient(135deg, #4ffefe 0%, #0600a1 100%);
 }
 
 /* ===== Reset y Estilos Generales ===== */

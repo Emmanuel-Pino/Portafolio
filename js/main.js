@@ -156,14 +156,7 @@ $(document).ready(function() {
         }
     });
 
-    // ===== FORMULARIO DE CONTACTO - PERMITIR ENVÍO =====
-    // NO prevenir el comportamiento por defecto
-    // Dejar que FormSubmit maneje el envío automáticamente
-    $('#contactForm').on('submit', function(e) {
-        console.log('Formulario enviándose a FormSubmit...');
-        // NO usar e.preventDefault() aquí
-        // El formulario se enviará normalmente
-    });
+
 
     // ===== Botón "Back to Top" =====
     $('body').append('<a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>');
